@@ -5,7 +5,7 @@
 UI给的checkbox设计图是这样的：
 ![image][img2]
 但是浏览器默认是这样的：
-![image][img1]
+[default checkbox](https://i.imgur.com/Ktrc7Hf.png)
 也太丑了吧，相差有点远！明显跟整个页面风格不协调。
 
 
