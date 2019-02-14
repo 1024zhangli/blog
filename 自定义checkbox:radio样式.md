@@ -1,0 +1,114 @@
+
+
+# 问题
+
+UI给的checkbox设计图是这样的：
+![image][img2]
+但是浏览器默认是这样的：
+![image][img1]
+也太丑了吧，相差有点远！明显跟整个页面风格不协调。
+
+
+# 实现
+在网上搜寻了一下，找到了实现原理，采用以下几个css技术，即可轻松实现自定义的checkbox/radio的效果：
+
+1. label标签for属性。原生的input是不能够改变浏览器默认的样式的，只能通过隐藏input，改变label的样式来模拟checkbox/radio；但是如何实现点击label标签能够达到勾选/去勾选的input的效果呢，答案就是label的for属性。label的for属性值设置成和input的id相同时，当点击label时和直接点击input效果相同。
+2. 伪类选择器:checked, 当checkbox/radio被选中时input会加上checked这个伪类，可以通过这个为选中后的checkbox/radio设置不同的样式
+3. +相邻兄弟选择器，表示选择该元素后面的兄弟节点。
+
+
+
+## 自定义checkbox样式
+
+样例代码：[在线预览地址](https://jsrun.net/RhXKp)
+
+```html
+<style>
+.checkbox-name {
+  vertical-align: middle;
+  font-size: 16px
+}
+
+.checkbox-beauty {
+  width: 16px;
+  height: 16px;
+  line-height: 16px;
+  text-align: center;
+  border: 1px solid #D9D9D9;
+  display: inline-block;
+  margin: 0 15px 0 3px;
+  vertical-align: middle;
+}
+
+input[type="checkbox"]:checked + .checkbox-beauty::after {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  content: '✓';
+  font-size: 16px;
+  font-weight: normal;
+  background-color: #4EBD74;
+  color: #ffffff!important;
+}
+</style>
+<div>
+  <span class="checkbox-name">前端</span>
+  <input type="checkbox" name="checkboxName" value="123" id="checkboxName1" hidden/>
+  <label for="checkboxName1" class="checkbox-beauty"></label>
+</div>
+```
+
+
+
+## 自定义radio样式
+
+样例代码，[在线预览地址](https://jsrun.net/uhXKp)
+
+```html
+<style>
+input[type=radio]:checked + .radio-beauty {
+  background-clip: content-box;
+  padding: 3px;
+  background-color: #4EBD74;
+  border-color: #4EBD74
+}
+
+.radio-beauty {
+  box-sizing: border-box;
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background: #ffffff;
+  border: 1px solid #D9D9D9;
+  border-radius: 50%;
+  vertical-align: middle;
+}
+
+.radio-name {
+  vertical-align: middle;
+  font-size: 14px;
+}
+</style>
+<div>
+  <input id="shape1" name="box-shape" type="radio" value="123" hidden/>
+  <label for="shape1" class="radio-beauty">
+  </label>
+  <span class="radio-name">
+    前端
+  </span>
+</div>
+```
+
+
+
+> 参考：https://github.com/jawil/blog/issues/29
+
+
+
+
+
+[img1]:data:image/png;base64,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
+
+
+
+[img2]:data:image/png;base64,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
