@@ -1,13 +1,10 @@
-
-
 # 问题
 
-UI给的checkbox设计图是这样的：
-![uiCheckbox](https://i.imgur.com/zrubm1w.png)
-但是浏览器默认是这样的：
-![defaultCheckbox](https://i.imgur.com/Ktrc7Hf.png)
-也太丑了吧，相差有点远！明显跟整个页面风格不协调。
-
+UI给的checkbox设计图是这样的：  
+![uiCheckbox](https://i.imgur.com/zrubm1w.png)  
+但是浏览器默认是这样的：  
+<br>![defaultCheckbox](https://i.imgur.com/Ktrc7Hf.png)  
+也太丑了吧，相差有点远！明显跟整个页面风格不协调，必须改！
 
 # 实现
 在网上搜寻了一下，找到了实现原理，采用以下几个css技术，即可轻松实现自定义的checkbox/radio的效果：
